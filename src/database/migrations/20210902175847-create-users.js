@@ -1,9 +1,7 @@
 'use strict';
 
-const Sequelizerc = require("../../../.sequelizerc");
-
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('users', {
       id: {
         type: Sequelize.INTEGER,
@@ -18,6 +16,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       password_hash: {
         type: Sequelize.STRING,
@@ -29,18 +28,18 @@ module.exports = {
         allowNull: false,
       },
       created_at: {
-        type: Sequelize.DATA,
+        type: Sequelize.DATE,
         allowNull: false,
       },
       update_at: {
-        type: Sequelize.DATA,
+        type: Sequelize.DATE,
         allowNull: false,
-      }
-     })
+      },
+     });
 
   },
 
-  down: async queryInterface => {
+  down: queryInterface => {
     return queryInterface.dropTable('users')
-  }
+  },
 };
